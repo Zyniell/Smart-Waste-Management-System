@@ -98,6 +98,11 @@ Terminal akan menampilkan **QR Code** interaktif beserta opsi pintasan tombol:
 
 Jika Anda menjalankan aplikasi di **HP fisik melalui Expo Go**, HP dan Laptop/PC Anda harus terhubung ke **jaringan Wi-Fi yang sama**.
 
+> [!IMPORTANT]
+> **Konfigurasi Windows Agar Koneksi HP Tidak Diblokir:**
+> * **Ubah Wi-Fi Laptop/PC ke "Private Network":** Masuk ke *Settings* > *Network & internet* > *Wi-Fi* > klik Wi-Fi aktif > pilih **Private network**.
+> * **Matikan Sementara Windows Defender Firewall:** Masuk ke *Windows Security* > *Firewall & network protection* > *Private network* > matikan (*Turn Off*) Firewall selama pengujian agar port `8000` (FastAPI) dan `8081` (Metro) dapat diakses dari HP.
+
 1. Cek alamat IP lokal komputer Anda (buka PowerShell/CMD dan ketik `ipconfig`, cari bagian *IPv4 Address*, misalnya: `192.168.1.14`).
 2. Buka aplikasi di HP melalui Expo Go.
 3. Di layar Login aplikasi mobile, klik tombol **"⚙️ Atur IP Server Backend"**.

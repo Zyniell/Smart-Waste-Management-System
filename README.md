@@ -74,7 +74,7 @@ Sebelum memulai instalasi, pastikan lingkungan komputer Anda telah terpasang per
    ```
 4. Jalankan server backend FastAPI:
    ```bash
-   uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+   python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
    ```
 5. Akses dokumentasi interaktif di browser:
    - **Swagger UI:** `http://localhost:8000/docs`
@@ -112,8 +112,18 @@ Sebelum memulai instalasi, pastikan lingkungan komputer Anda telah terpasang per
    ```
 3. Jalankan Expo bundler:
    ```bash
-   npx expo start
+   npx expo start --tunnel
    ```
+
+> [!IMPORTANT]
+> **Wajib Dilakukan Agar HP Fisik Terhubung Lancar ke Laptop/PC (Tidak Terblokir):**
+> 1. **Ubah Wi-Fi Laptop/PC ke "Private Network" (Bukan Public):**
+>    * Buka **Settings (Pengaturan Windows)** > **Network & internet** > **Wi-Fi** > Klik nama Wi-Fi yang sedang aktif.
+>    * Pada bagian *Network profile type*, pilih **Private network**.
+> 2. **Matikan Sementara Windows Firewall:**
+>    * Buka **Windows Security** > **Firewall & network protection** > Klik **Private network**.
+>    * Ubah opsi **Microsoft Defender Firewall** menjadi **Off (Nonaktif)** selama pengujian, agar sistem Windows tidak memblokir akses port `8000` (FastAPI) dan port `8081` (Expo) dari HP Anda.
+
 4. **Cara Menjalankan:**
    - **Di HP Fisik (Expo Go):** Buka aplikasi Expo Go di ponsel Android/iOS yang berada dalam **satu jaringan Wi-Fi yang sama** dengan laptop/PC, lalu pindai (_scan_) QR Code yang muncul di terminal.
    - **Pengaturan Alamat IP Backend di HP:** Di halaman login mobile, klik tombol _"Konfigurasi IP Server"_ dan masukkan IP LAN komputer Anda (contoh: `192.168.1.14:8000`).
