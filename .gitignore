@@ -1,0 +1,94 @@
+# =============================================================================
+# 1. ENVIRONMENT VARIABLES & SECRETS (KEAMANAN)
+# =============================================================================
+.env
+.env.*
+*.env
+*.local
+!.env.example
+
+# =============================================================================
+# 2. DEPENDENCIES & PACKAGE MANAGERS
+# =============================================================================
+node_modules/
+*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =============================================================================
+# 3. PYTHON & BACKEND RUNTIME ARTIFACTS
+# =============================================================================
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+venv/
+.venv/
+env/
+ENV/
+
+# =============================================================================
+# 4. MACHINE LEARNING HEAVY FILES (> 100 MB GITHUB LIMIT)
+# =============================================================================
+# Arsip dataset mentah berukuran 251 MB (melebihi limit GitHub 100MB)
+*.zip
+backend/ml/garbage_classification.zip
+
+# Folder ekstraksi mentah kaggle 239 MB
+backend/ml/kaggle_extracted/
+
+# PENTING: Model .keras (13.9 MB) & Dataset 750 citra (9.5 MB) TETAP DISIMPAN
+!backend/ml/saved_models/waste_classifier.keras
+!backend/ml/dataset/
+
+# =============================================================================
+# 5. WEB FRONTEND (REACT + VITE)
+# =============================================================================
+web/dist/
+web/dist-ssr/
+.vite/
+web/.vite/
+
+# =============================================================================
+# 6. MOBILE APP (EXPO & REACT NATIVE)
+# =============================================================================
+mobile/.expo/
+mobile/.expo-shared/
+mobile/web-build/
+mobile/dist/
+mobile/android/
+mobile/ios/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.tsbuildinfo
+
+# =============================================================================
+# 7. USER DYNAMIC UPLOADS
+# =============================================================================
+# Mengabaikan foto dinamis yang diunggah saat pengujian runtime,
+# namun tetap mempertahankan foto sampel demo seeder
+uploads/reports/*
+!uploads/reports/sample_*.jpg
+!uploads/reports/.gitkeep
+
+# =============================================================================
+# 8. OPERATING SYSTEM & EDITOR FILES
+# =============================================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+mobile/.claude/
+
