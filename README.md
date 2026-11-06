@@ -7,18 +7,21 @@
 
 ## 📑 Daftar Isi
 1. [Ringkasan Proyek](#-ringkasan-proyek)
-2. [Pemenuhan Komponen & Fitur](#-pemenuhan-komponen--fitur)
-3. [Arsitektur Monorepo](#-arsitektur-monorepo)
-4. [Prasyarat Sistem](#-prasyarat-sistem)
-5. [Panduan Instalasi & Penggunaan](#-panduan-instalasi--penggunaan)
+2. [Prasyarat Sistem & Panduan Instalasi](#-prasyarat-sistem--panduan-instalasi)
+   - [Prasyarat Sistem](#-prasyarat-sistem)
    - [Langkah 1: Konfigurasi Basis Data PostgreSQL & .env](#langkah-1-konfigurasi-basis-data-postgresql---env)
-   - [Langkah 2: Setup & Menjalankan Backend](#langkah-2-setup--menjalankan-backend-fastapi)
-   - [Langkah 3: Menjalankan Portal Web](#langkah-3-menjalankan-portal-web-react--vite)
-   - [Langkah 4: Menjalankan Aplikasi Mobile](#langkah-4-menjalankan-aplikasi-mobile-expo--react-native)
+   - [Langkah 2: Setup & Menjalankan Backend (FastAPI)](#langkah-2-setup--menjalankan-backend-fastapi)
+   - [Langkah 3: Menjalankan Portal Web (React + Vite)](#langkah-3-menjalankan-portal-web-react--vite)
+   - [Langkah 4: Menjalankan Aplikasi Mobile (Expo / React Native)](#langkah-4-menjalankan-aplikasi-mobile-expo--react-native)
    - [Langkah 5: Pelatihan Ulang Model ML (Opsional)](#langkah-5-pelatihan-ulang-model-machine-learning-opsional)
-6. [Akun Demo Pengujian](#-akun-demo-pengujian)
-7. [Dokumentasi API & Basis Data](#-dokumentasi-api--basis-data)
-8. [Status Berkas Pengumpulan (Poin 1 - 10)](#-status-berkas-pengumpulan-poin-1---10)
+   - [Akun Demo Pengujian](#-akun-demo-pengujian)
+3. [Pemenuhan Komponen & Fitur](#-pemenuhan-komponen--fitur)
+   - [A. Website Development](#a-website-development-react-18--vite--tailwind-css)
+   - [B. Mobile Application](#b-mobile-application-react-native--expo-sdk)
+   - [C. Machine Learning](#c-machine-learning-python--tensorflow--keras)
+4. [Arsitektur Monorepo](#-arsitektur-monorepo)
+5. [Dokumentasi API & Basis Data](#-dokumentasi-api--basis-data)
+6. [Status Berkas Pengumpulan (Poin 1 - 10)](#-status-berkas-pengumpulan-poin-1---10)
 
 ---
 
@@ -31,97 +34,18 @@ Smart Waste Management System dibangun untuk mengatasi permasalahan pengelolaan 
 
 ---
 
-## 🚀 Pemenuhan Komponen & Fitur
+## 🛠️ Prasyarat Sistem & Panduan Instalasi
 
-### A. Website Development (React 18 + Vite + Tailwind CSS)
-* [x] **Autentikasi Berbasis Peran:** Login & Register membedakan hak akses `ADMIN` dan `USER`.
-* [x] **Dashboard Statistik:** Kartu metrik realtime, grafik batang status, grafik donat proporsi kategori, dan peta sebaran geolokasi Leaflet.
-* [x] **Manajemen Laporan (CRUD Lengkap):** Buat laporan baru, lihat detail laporan + peta, ubah data/status, serta hapus laporan.
-* [x] **Filter & Pencarian Laporan:** Pencarian teks bebas serta filter multi-kriteria (Status, Kategori, dan tombol "Laporan Saya").
-* [x] **Manajemen Pengguna (Admin Only):** Kelola daftar warga, ubah peran (Admin/User), aktifasi/nonaktifasi akun, dan reset kata sandi.
-* [x] **Pembaruan Status Laporan:** Modal khusus admin untuk mengubah status (`PENDING`, `IN_PROGRESS`, `COMPLETED`, `REJECTED`) disertai catatan penanganan petugas.
-* [x] **Desain Responsif:** Tampilan adaptif di perangkat mobile, tablet, dan desktop dengan drawer menu hamburger.
-
-### B. Mobile Application (React Native + Expo SDK)
-* [x] **Registrasi & Login:** Layar autentikasi warga dengan penyimpanan sesi JWT di `AsyncStorage`.
-* [x] **Dashboard Pengguna:** Menampilkan ringkasan jumlah laporan pribadi, pintasan cepat, dan riwayat laporan terkini.
-* [x] **Pembuatan Laporan Terpadu:**
-  * **Foto:** Mengambil foto langsung dari Kamera atau memilih dari Galeri (`expo-image-picker`).
-  * **Lokasi GPS:** Pengambilan koordinat lintang & bujur realtime serta konversi alamat otomatis (*reverse geocoding*) via `expo-location`.
-  * **Deskripsi:** Formulir judul, kategori sampah, dan deskripsi detail.
-* [x] **Integrasi AI Otomatis:** Saat foto sampah dipilih, AI otomatis memprediksi kategori sampah dan mengisi pilihan form secara instan.
-* [x] **Riwayat & Status Laporan:** Tab riwayat dengan filter status (*Semua, Pending, Diproses, Selesai, Ditolak*) dan modal rincian status penanganan.
-* [x] **Integrasi REST API:** Pengiriman data multipart (foto + teks) dan pengambilan data via Axios.
-
-### C. Machine Learning (Python + TensorFlow / Keras)
-* [x] **Arsitektur Model:** *Transfer Learning* berbasis **MobileNetV2** (pre-trained ImageNet) yang ringan dan cepat untuk komputasi inferensi.
-* [x] **3 Kategori Klasifikasi:** *Organic Waste*, *Plastic Waste*, dan *Paper Waste*.
-* [x] **Dataset Nyata:** 750 citra nyata Kaggle Garbage Classification (600 data latih, 150 data uji).
-* [x] **Evaluasi Kuantitatif:** Tersedia Classification Report (Precision, Recall, F1-Score) dan Heatmap Confusion Matrix.
-* [x] **Target Akurasi Terpenuhi:** Mencapai akurasi pengujian **100.00%** pada 150 data uji (jauh melampaui target minimal 80.00%).
-* [x] **REST API Inferensi:** Endpoint `POST /api/predict` berbasis FastAPI yang siap melayani prediksi citra secara realtime.
-
----
-
-## 📂 Arsitektur Monorepo
-
-```
-smart/
-├── .env                                  # Konfigurasi Environment Utama (Database, JWT, Ports)
-├── README.md                             # Dokumentasi Utama Sistem (Berkas Ini)
-├── Laporan_Teknis_Smart_Waste.pdf        # Dokumen PDF Resmi Pengumpulan (Poin 4 - 8)
-│
-├── backend/                              # [Service Backend & Machine Learning]
-│   ├── main.py                           # Entrypoint aplikasi FastAPI
-│   ├── seed.py                           # Database seeder (akun default & laporan sampel)
-│   ├── requirements.txt                  # Dependensi Python
-│   ├── core/                             # Konfigurasi database & JWT security
-│   ├── models/                           # Model tabel SQLAlchemy (User, Report)
-│   ├── routers/                          # Endpoint REST API (auth, users, reports, stats, predict)
-│   ├── schemas/                          # Skema validasi Pydantic v2
-│   └── ml/                               # Modul Machine Learning
-│       ├── train.py                      # Script pelatihan model & evaluasi
-│       ├── predict_service.py            # Service inferensi citra
-│       ├── saved_models/                 # File bobot model terlatih (.keras)
-│       ├── reports/                      # metrics.json & confusion_matrix.png
-│       └── dataset/                      # 750 citra dataset (train & test)
-│
-├── web/                                  # [Portal Web Admin & Citizen - React Vite]
-│   ├── src/                              # Source code React TypeScript
-│   │   ├── pages/                        # Dashboard, Reports CRUD, Users, Login, Scanner
-│   │   ├── components/                   # Navbar, ProtectedRoute, WasteMap, StatusBadge
-│   │   ├── context/                      # AuthContext, ToastContext
-│   │   └── services/api.ts               # Integrasi Axios client
-│   └── package.json                      # Dependensi frontend web
-│
-├── mobile/                               # [Aplikasi Mobile Warga - Expo React Native]
-│   ├── src/app/                          # File-based routing Expo Router
-│   │   ├── (tabs)/                       # Layar Dashboard, Laporan (Kamera/GPS), Riwayat, Scan
-│   │   └── login.tsx                     # Layar Login & Registrasi warga
-│   ├── src/services/api.ts               # Integrasi API seluler
-│   └── package.json                      # Dependensi Expo
-│
-├── docs/                                 # [Dokumentasi & Aset Pendukung]
-│   ├── erd_diagram.png                   # Diagram relasi tabel database visual (300 DPI)
-│   └── Laporan_Teknis_Smart_Waste.pdf    # Salinan berkas PDF teknis
-│
-└── uploads/                              # Direktori penyimpanan berkas foto laporan di server
-```
-
----
-
-## 💻 Prasyarat Sistem
+### 💻 Prasyarat Sistem
 
 Sebelum memulai instalasi, pastikan lingkungan komputer Anda telah terpasang perangkat lunak berikut:
 1. **Python:** Versi `3.10` hingga `3.13` ([Unduh Python](https://www.python.org/downloads/))
 2. **Node.js:** Versi `18.x` atau yang lebih baru ([Unduh Node.js](https://nodejs.org/))
 3. **PostgreSQL:** Versi `14` atau lebih baru (bisa menggunakan PostgreSQL bawaan Laragon, pgAdmin, atau Docker)
 4. **Git:** Untuk manajemen version control ([Unduh Git](https://git-scm.com/))
-5. **Expo Go (Opsional untuk pengujian di HP):** Pasang aplikasi **Expo Go** melalui Google Play Store atau Apple App Store.
+5. **Expo Go (Opsional untuk pengujian di HP fisik):** Pasang aplikasi **Expo Go** melalui Google Play Store atau Apple App Store.
 
 ---
-
-## 🛠️ Panduan Instalasi & Penggunaan
 
 ### Langkah 1: Konfigurasi Basis Data PostgreSQL & `.env`
 
@@ -211,7 +135,7 @@ python backend/ml/train.py
 
 ---
 
-## 🔑 Akun Demo Pengujian
+### 🔑 Akun Demo Pengujian
 
 Sistem telah dilengkapi dengan akun bawaan (*seeded accounts*) yang dapat langsung Anda gunakan untuk menguji hak akses:
 
@@ -221,6 +145,87 @@ Sistem telah dilengkapi dengan akun bawaan (*seeded accounts*) yang dapat langsu
 | **Citizen (Warga)** | `budi@smartwaste.local` | `user123` | Akses warga: Buat laporan sampah (Kamera + GPS), deteksi AI, lihat riwayat pribadi, kelola laporan milik sendiri. |
 
 > *Catatan: Anda juga dapat mendaftarkan akun warga baru secara bebas melalui menu **Register** di Website maupun Aplikasi Mobile.*
+
+---
+
+## 🚀 Pemenuhan Komponen & Fitur
+
+### A. Website Development (React 18 + Vite + Tailwind CSS)
+* [x] **Autentikasi Berbasis Peran:** Login & Register membedakan hak akses `ADMIN` dan `USER`.
+* [x] **Dashboard Statistik:** Kartu metrik realtime, grafik batang status, grafik donat proporsi kategori, dan peta sebaran geolokasi Leaflet.
+* [x] **Manajemen Laporan (CRUD Lengkap):** Buat laporan baru, lihat detail laporan + peta, ubah data/status, serta hapus laporan.
+* [x] **Filter & Pencarian Laporan:** Pencarian teks bebas serta filter multi-kriteria (Status, Kategori, dan tombol "Laporan Saya").
+* [x] **Manajemen Pengguna (Admin Only):** Kelola daftar warga, ubah peran (Admin/User), aktifasi/nonaktifasi akun, dan reset kata sandi.
+* [x] **Pembaruan Status Laporan:** Modal khusus admin untuk mengubah status (`PENDING`, `IN_PROGRESS`, `COMPLETED`, `REJECTED`) disertai catatan penanganan petugas.
+* [x] **Desain Responsif:** Tampilan adaptif di perangkat mobile, tablet, dan desktop dengan drawer menu hamburger.
+
+### B. Mobile Application (React Native + Expo SDK)
+* [x] **Registrasi & Login:** Layar autentikasi warga dengan penyimpanan sesi JWT di `AsyncStorage`.
+* [x] **Dashboard Pengguna:** Menampilkan ringkasan jumlah laporan pribadi, pintasan cepat, dan riwayat laporan terkini.
+* [x] **Pembuatan Laporan Terpadu:**
+  * **Foto:** Mengambil foto langsung dari Kamera atau memilih dari Galeri (`expo-image-picker`).
+  * **Lokasi GPS:** Pengambilan koordinat lintang & bujur realtime serta konversi alamat otomatis (*reverse geocoding*) via `expo-location`.
+  * **Deskripsi:** Formulir judul, kategori sampah, dan deskripsi detail.
+* [x] **Integrasi AI Otomatis:** Saat foto sampah dipilih, AI otomatis memprediksi kategori sampah dan mengisi pilihan form secara instan.
+* [x] **Riwayat & Status Laporan:** Tab riwayat dengan filter status (*Semua, Pending, Diproses, Selesai, Ditolak*) dan modal rincian status penanganan.
+* [x] **Integrasi REST API:** Pengiriman data multipart (foto + teks) dan pengambilan data via Axios.
+
+### C. Machine Learning (Python + TensorFlow / Keras)
+* [x] **Arsitektur Model:** *Transfer Learning* berbasis **MobileNetV2** (pre-trained ImageNet) yang ringan dan cepat untuk komputasi inferensi.
+* [x] **3 Kategori Klasifikasi:** *Organic Waste*, *Plastic Waste*, dan *Paper Waste*.
+* [x] **Dataset Nyata:** 750 citra nyata Kaggle Garbage Classification (600 data latih, 150 data uji).
+* [x] **Evaluasi Kuantitatif:** Tersedia Classification Report (Precision, Recall, F1-Score) dan Heatmap Confusion Matrix.
+* [x] **Target Akurasi Terpenuhi:** Mencapai akurasi pengujian **100.00%** pada 150 data uji (jauh melampaui target minimal 80.00%).
+* [x] **REST API Inferensi:** Endpoint `POST /api/predict` berbasis FastAPI yang siap melayani prediksi citra secara realtime.
+
+---
+
+## 📂 Arsitektur Monorepo
+
+```
+smart/
+├── .env                                  # Konfigurasi Environment Utama (Database, JWT, Ports)
+├── .env.example                          # Template konfigurasi environment publik
+├── .gitignore                            # Filter pengecualian file raksasa & rahasia
+├── README.md                             # Dokumentasi Utama Sistem (Berkas Ini)
+├── Laporan_Teknis_Smart_Waste.pdf        # Dokumen PDF Resmi Pengumpulan (Poin 4 - 8)
+│
+├── backend/                              # [Service Backend & Machine Learning]
+│   ├── main.py                           # Entrypoint aplikasi FastAPI
+│   ├── seed.py                           # Database seeder (akun default & laporan sampel)
+│   ├── requirements.txt                  # Dependensi Python
+│   ├── core/                             # Konfigurasi database & JWT security
+│   ├── models/                           # Model tabel SQLAlchemy (User, Report)
+│   ├── routers/                          # Endpoint REST API (auth, users, reports, stats, predict)
+│   ├── schemas/                          # Skema validasi Pydantic v2
+│   └── ml/                               # Modul Machine Learning
+│       ├── train.py                      # Script pelatihan model & evaluasi
+│       ├── predict_service.py            # Service inferensi citra
+│       ├── saved_models/                 # File bobot model terlatih (.keras)
+│       ├── reports/                      # metrics.json & confusion_matrix.png
+│       └── dataset/                      # 750 citra dataset (train & test)
+│
+├── web/                                  # [Portal Web Admin & Citizen - React Vite]
+│   ├── src/                              # Source code React TypeScript
+│   │   ├── pages/                        # Dashboard, Reports CRUD, Users, Login, Scanner
+│   │   ├── components/                   # Navbar, ProtectedRoute, WasteMap, StatusBadge
+│   │   ├── context/                      # AuthContext, ToastContext
+│   │   └── services/api.ts               # Integrasi Axios client
+│   └── package.json                      # Dependensi frontend web
+│
+├── mobile/                               # [Aplikasi Mobile Warga - Expo React Native]
+│   ├── src/app/                          # File-based routing Expo Router
+│   │   ├── (tabs)/                       # Layar Dashboard, Laporan (Kamera/GPS), Riwayat, Scan
+│   │   └── login.tsx                     # Layar Login & Registrasi warga
+│   ├── src/services/api.ts               # Integrasi API seluler
+│   └── package.json                      # Dependensi Expo
+│
+├── docs/                                 # [Dokumentasi & Aset Pendukung]
+│   ├── erd_diagram.png                   # Diagram relasi tabel database visual (300 DPI)
+│   └── Laporan_Teknis_Smart_Waste.pdf    # Salinan berkas PDF teknis
+│
+└── uploads/                              # Direktori penyimpanan berkas foto laporan di server
+```
 
 ---
 
@@ -255,4 +260,3 @@ Sistem telah dilengkapi dengan akun bawaan (*seeded accounts*) yang dapat langsu
 ---
 
 *Dikembangkan dengan dedikasi untuk kebersihan lingkungan dan efisiensi pengelolaan sampah cerdas.*
-
